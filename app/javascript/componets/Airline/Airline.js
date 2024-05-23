@@ -1,16 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
-// import AxiosWrapper from '../../utils/Requests/AxiosWrapper'
-/*
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-Uncomment these if you want to use the V2 API (Graphql):
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-import airlineQuery from '../../queries/airlineQuery'
-import createReviewQuery from '../../queries/createReviewQuery'
-import deleteReviewQuery from '../../queries/deleteReviewQuery'
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-*/
+import Review from '../Review/Review'
+import ReviewForm from '../Review/ReviewForm'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -129,13 +121,12 @@ const Airline = (props) => {
     
     userReviews = reviews.map( (review, index) => {
       return (
-          <div>review</div>
-        // <Review
-        //   key={index}
-        //   id={review.id}
-        //   attributes={review.attributes}
-        //   handleDestroy={handleDestroy}
-        // />
+        <Review
+          key={index}
+          id={review.id}
+          attributes={review.attributes}
+          handleDestroy={handleDestroy}
+        />
       )
     })
   }
@@ -156,14 +147,14 @@ const Airline = (props) => {
             </Main>
           </Column>
           <Column>
-            {/*<ReviewForm*/}
-            {/*  name={airline.data.attributes.name}*/}
-            {/*  review={review}*/}
-            {/*  handleChange={handleChange}*/}
-            {/*  handleSubmit={handleSubmit}*/}
-            {/*  setRating={setRating}*/}
-            {/*  error={error}*/}
-            {/*/>*/}
+            <ReviewForm
+              name={airlineAttributes.name}
+              review={review}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              setRating={setRating}
+              error={error}
+            />
           </Column>
         </Fragment>
       }
