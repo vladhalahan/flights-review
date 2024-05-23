@@ -45,6 +45,8 @@ gem 'dry-validation'
 # A simple, standardized way to build and use Service Objects (aka Commands) in Ruby
 gem 'simple_command'
 
+gem 'pundit'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -68,10 +70,11 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'simplecov', require: false
+  gem 'pundit-matchers'
+  gem 'rspec-graphql_matchers'
+  gem 'rspec-rails'
+  gem 'simplecov'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
