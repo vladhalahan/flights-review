@@ -57,12 +57,12 @@ module Api
 
       # Get all airlines
       def airlines
-        @airlines ||= Airline.includes(reviews: :user).all
+        @airlines ||= Airline.all
       end
 
       # Get a specific airline
       def airline
-        @airline ||= Airline.includes(reviews: :user).find_by(slug: params[:slug])
+        @airline ||= Airline.includes(:reviews).find_by(slug: params[:slug])
       end
 
       # Strong params
