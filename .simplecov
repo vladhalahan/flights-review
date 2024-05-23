@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-SimpleCov.add_group('GraphQL', 'app/graphql')
 SimpleCov.add_group('Policies', 'app/policies')
 
 # Exclude folders/files
