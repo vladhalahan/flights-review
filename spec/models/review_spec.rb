@@ -8,4 +8,26 @@ RSpec.describe Review, type: :model do
       expect(described_class.reflect_on_association(:airline).macro).to eq :belongs_to
     end
   end
+
+  describe 'callbacks' do
+    let(:airline) { create(:airline) }
+    let(:review) { build(:review, airline:) }
+
+    it 'calls calculate_average on the airline after commit' do
+      expect(airline).to receive(:calculate_average).once
+      review.save!
+    end
+
+    it 'calls calculate_average on the airline after update' do
+      review.save!
+      expect(airline).to receive(:calculate_average).once
+      review.update!(description: 'Updated content')
+    end
+
+    it 'calls calculate_average on the airline after destroy' do
+      review.save!
+      expect(airline).to receive(:calculate_average).once
+      review.destroy
+    end
+  end
 end
