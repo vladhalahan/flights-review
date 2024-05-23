@@ -1,0 +1,234 @@
+# rubocop configuration file
+#
+# rubocop is a static code analyzer, also called a linter, for Ruby.
+#
+# more info on rubocop: https://rubocop.readthedocs.io/en/latest/
+# more info on this file: https://rubocop.readthedocs.io/en/latest/configuration/
+
+inherit_from: .rubocop_todo.yml
+
+# https://github.com/rubocop/rubocop-rails
+# https://github.com/rubocop/rubocop-rspec
+# https://github.com/rubocop/rubocop-performance
+# https://github.com/rubocop/rubocop-rake
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-rake
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - '.buildkite/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - db/schema.rb
+    - 'app/views/**/*'
+  NewCops: disable
+
+Bundler/OrderedGems:
+  Enabled: false
+
+#Metrics Cops
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 50
+Layout/LineLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: true
+  Exclude:
+    - 'app/lib/feature_flags.rb'
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+#Layout Cops
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLines:
+  Enabled: true
+
+Layout/TrailingEmptyLines:
+  Enabled: true
+  EnforcedStyle: final_newline
+
+#Lint Cops
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Lint/AmbiguousOperator:
+  Enabled: false
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: false
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: false
+Lint/DuplicateCaseCondition:
+  Enabled: false
+Lint/DuplicateElsifCondition:
+  Enabled: false
+Lint/EmptyConditionalBody:
+  Enabled: false
+Lint/EmptyFile:
+  Enabled: true
+Lint/FloatComparison:
+  Enabled: false
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+Lint/NonDeterministicRequireOrder:
+  Enabled: false
+Lint/OutOfRangeRegexpRef:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: false
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+Lint/RedundantSafeNavigation:
+  Enabled: false
+Lint/SafeNavigationChain:
+  Enabled: false
+Lint/SelfAssignment:
+  Enabled: false
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+Lint/StructNewOverride:
+  Enabled: false
+Lint/SuppressedException:
+  Enabled: false
+Lint/TopLevelReturnWithArgument:
+  Exclude:
+    - 'Gemfile'
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+Lint/UnreachableCode:
+  Enabled: false
+Lint/UnreachableLoop:
+  Enabled: false
+Lint/UnusedBlockArgument:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
+Lint/UriEscapeUnescape:
+  Enabled: false
+Lint/UselessAccessModifier:
+  Enabled: false
+Lint/UselessMethodDefinition:
+  Enabled: false
+
+#RSpec Cops
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/Capybara/FeatureMethods:
+  EnabledMethods:
+    - scenario
+    - feature
+RSpec/DescribeClass:
+  Enabled: true
+RSpec/EmptyExampleGroup:
+  Enabled: true
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: true
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Max: 25
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 8
+RSpec/RepeatedExample:
+  Enabled: true
+  Exclude:
+    - 'spec/policies/**/*'
+RSpec/StubbedMock:
+  Enabled: true
+RSpec/VerifiedDoubles:
+  Enabled: true
+  Exclude:
+    - 'spec/services/downstream/*'
+
+#Style Cops
+Naming/RescuedExceptionsVariableName:
+  Enabled: true
+  PreferredName: error
+Naming/VariableName:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
+Naming/VariableNumber:
+  Enabled: false
+Style/AccessModifierDeclarations:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: true
+Style/GlobalVars:
+  Enabled: true
+  AllowedVariables:
+    - $redis
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/Next:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: true
+Style/RedundantReturn:
+  Enabled: false
+Style/RescueStandardError:
+  Enabled: true
+  EnforcedStyle: implicit
+Style/TernaryParentheses:
+  Enabled: true
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: comma
+Style/HashTransformValues:
+  Enabled: true
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+  ConsistentQuotesInMultiline: true
+
+# Rails
+Rails/Delegate:
+  Enabled: true
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - test
