@@ -29,4 +29,11 @@ class User < ApplicationRecord
   def default_role
     self.role = User.roles[:regular]
   end
+
+  # explicit defining of predicates methods is required since we use enum on string column
+  roles.each_key do |role|
+    define_method("#{role}?") do
+      self.role == role
+    end
+  end
 end
