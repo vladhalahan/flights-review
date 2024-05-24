@@ -82,6 +82,7 @@ const CreateAirline = (props) => {
                 <Column>
                     <Main>
                         <h1>Add New Airline</h1>
+                        <p>tip: example image URL https://open-flights.s3.amazonaws.com/JetBlue.png</p>
                     </Main>
                 </Column>
                 <Column>

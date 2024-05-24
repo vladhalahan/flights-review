@@ -27,6 +27,8 @@ class Review < ApplicationRecord
   belongs_to :airline
   belongs_to :user
 
+  validates :title, :score, presence: true
+
   # Recalculate the average score for a parent airline
   # whenever a review is created/updated/destroyed
   after_commit ->(review) { review.airline.calculate_average }

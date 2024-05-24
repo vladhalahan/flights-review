@@ -99,6 +99,9 @@ const Airline = (props) => {
             case 'Request failed with status code 401':
               errorMessage = 'You have no permissions to perform this action.';
               break;
+            case 'Request failed with status code 422':
+              errorMessage = 'Bad request. Make sure you\'ve filled all needed data';
+              break;
             default:
               errorMessage = 'Something went wrong.';
           }
