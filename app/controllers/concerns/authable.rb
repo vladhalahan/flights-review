@@ -3,8 +3,10 @@
 module Authable
   extend ActiveSupport::Concern
 
+  include Pundit::Authorization
+
   included do
-    # before_action :current_user
+    before_action :current_user
   end
 
   def current_user
@@ -14,7 +16,6 @@ module Authable
   end
 
   def authenticate
-    true
-    # render json: { error: 'Access Denied' }, status: :unauthorized unless current_user
+    render json: { error: 'Access Denied' }, status: :unauthorized unless current_user
   end
 end

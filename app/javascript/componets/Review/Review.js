@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { AuthConsumer } from '../AuthContext'
+import { AuthConsumer } from '../AuthContext'
 import Rating from '../Rating/Rating'
 import Avatar from '../Airline/Avatar'
 
@@ -68,40 +68,37 @@ const AvatarWrapper = styled.div`
 const Review = ({attributes, ...props}) => {
   const {title, description, score} = attributes
 
-  return(
-      <div>this is review</div>
+  return (
+    <AuthConsumer>
+      { ({ isAuth, email }) => (
+        <Card>
+          <RatingContainer>
+            <AvatarWrapper><Avatar/></AvatarWrapper>
+            <Rating score={score}/>
+            <Author>{attributes.email}</Author>
+          </RatingContainer>
+          <Title>
+            {title}
+          </Title>
+          <Description>
+            {description}
+          </Description>
+            {
+              isAuth &&
+              email === attributes.email &&
+              <Options>
+                <Icon onClick={props.handleDestroy.bind(this, props.id)}>
+                  <i className="fa fa-trash"></i>
+                </Icon>
+                <Icon>
+                  <i className="fa fa-pencil"></i>
+                </Icon>
+              </Options>
+            }
+        </Card>
+      )}
+    </AuthConsumer>
   )
-  // return (
-  //   <AuthConsumer>
-  //     { ({ isAuth, email }) => (
-  //       <Card>
-  //         <RatingContainer>
-  //           <AvatarWrapper><Avatar/></AvatarWrapper>
-  //           <Rating score={score}/>
-  //           <Author>{attributes.email}</Author>
-  //         </RatingContainer>
-  //         <Title>
-  //           {title}
-  //         </Title>
-  //         <Description>
-  //           {description}
-  //         </Description>
-  //           {
-  //             isAuth &&
-  //             email === attributes.email &&
-  //             <Options>
-  //               <Icon onClick={props.handleDestroy.bind(this, props.id)}>
-  //                 <i className="fa fa-trash"></i>
-  //               </Icon>
-  //               <Icon>
-  //                 <i className="fa fa-pencil"></i>
-  //               </Icon>
-  //             </Options>
-  //           }
-  //       </Card>
-  //     )}
-  //   </AuthConsumer>
-  // )
 }
 
 export default Review

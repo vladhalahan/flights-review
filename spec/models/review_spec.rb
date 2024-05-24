@@ -11,7 +11,8 @@ RSpec.describe Review, type: :model do
 
   describe 'callbacks' do
     let(:airline) { create(:airline) }
-    let(:review) { build(:review, airline:) }
+    let(:user) { create(:user) }
+    let(:review) { build(:review, user:, airline:) }
 
     it 'calls calculate_average on the airline after commit' do
       expect(airline).to receive(:calculate_average).once

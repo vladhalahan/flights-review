@@ -33,8 +33,9 @@ RSpec.describe Airline, type: :model do
 
     context 'when there are reviews' do
       before do
-        create(:review, airline:, score: 5)
-        create(:review, airline:, score: 3)
+        create(:user)
+        create(:review, airline:, user: User.last, score: 5)
+        create(:review, airline:, user: User.last, score: 3)
       end
 
       it 'calculates the average score of all reviews and updates the average_score' do

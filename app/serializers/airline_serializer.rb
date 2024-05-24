@@ -8,5 +8,7 @@ class AirlineSerializer
     (object.average_score.to_f / 100).to_f.round(2)
   end
 
-  has_many :reviews
+  has_many :reviews do |airline|
+    airline.reviews.order(created_at: :desc)
+  end
 end

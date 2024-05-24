@@ -10,7 +10,7 @@ module Api
 
         if user&.authenticate(params[:user][:password])
           session[:user_id] = user.id
-          render json: { status: :success, logged_in: true }, status: :no_content
+          render json: { status: :success, logged_in: true }, status: :ok
         else
           render json: { status: :error, logged_in: false }, status: :bad_request
         end

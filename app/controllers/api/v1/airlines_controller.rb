@@ -56,15 +56,13 @@ module Api
       end
 
       # Get all airlines
-      # TODO: Add user to join
       def airlines
-        @airlines ||= Airline.all
+        @airlines ||= Airline.includes(reviews: :user).all
       end
 
       # Get a specific airline
-      # TODO: Add user to join
       def airline
-        @airline ||= Airline.includes(:reviews).find_by(slug: params[:slug])
+        @airline ||= Airline.includes(reviews: :user).find_by(slug: params[:slug])
       end
 
       # Strong params

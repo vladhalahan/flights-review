@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Header from './Header'
 import Review from '../Review/Review'
 import ReviewForm from '../Review/ReviewForm'
+import GetCSRFToken from '../../utils/Helpers/GetCSRFToken'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -46,7 +47,7 @@ const Airline = (props) => {
     const slug = props.match.params.slug
     let resourceURL = `/api/v1/airlines/${slug}`
 
-    return await (await fetch(resourceURL, { method: 'GET' })).json()
+    return await (await fetch(resourceURL, { method: 'GET', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': GetCSRFToken() }})).json()
   }
 
   const fetchAirlineData = async () => {
@@ -54,7 +55,7 @@ const Airline = (props) => {
 
     setAirline(response.data)
     setAirlineAttributes(response.data.attributes)
-    setReviews(response.data.included)
+    setReviews(response.included)
     setLoaded(true)
   }
 
@@ -68,42 +69,69 @@ const Airline = (props) => {
   }
 
   // Create review
-  async function handleSubmit(e) {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const airline_id = parseInt(airline.data.id)
-    const fetchResponse = await fetch('/api/v1/reviews', {
+    const airline_id = parseInt(airline.id);
+    fetch('/api/v1/reviews', {
       method: 'POST',
-      body: { ...review, airline_id },
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
+        'X-CSRF-Token': GetCSRFToken(),
+      },
+      credentials: 'include',
+      body: JSON.stringify({ ...review, airline_id })
     })
-    const response = await fetchResponse.json()
-
-    if (response.success) {
-      setReviews([...reviews, response.data])
-      setReview({ title: '', description: '', score: 0 })
-      setError('')
-    } else {
-      response.error && setError(error)
-    }
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Request failed with status code ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setReviews([...reviews, data.data]);
+          setReview({ title: '', description: '', score: 0 });
+          setError('');
+        })
+        .catch(error => {
+          let errorMessage;
+          switch (error.message) {
+            case 'Request failed with status code 401':
+              errorMessage = 'Please log in to leave a review.';
+              break;
+            default:
+              errorMessage = 'Something went wrong.';
+          }
+          setError(errorMessage);
+        });
   }
 
   // Destroy a review
   const handleDestroy = (id, e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // AxiosWrapper.delete(`/api/v1/reviews/${id}`)
-    // .then( (data) => {
-    //   const included = [...reviews]
-    //   const index = included.findIndex( (data) => data.id == id )
-    //   included.splice(index, 1)
-    //
-    //   setReviews(included)
-    // })
-    // .catch( data => console.log('Error', data) )
+    fetch(`/api/v1/reviews/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': GetCSRFToken(),
+      },
+      credentials: 'include'
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const included = [...reviews];
+          const index = included.findIndex((item) => item.id == id);
+          included.splice(index, 1);
+
+          setReviews(included);
+        })
+        .catch(error => console.log('Error', error));
   }
 
   // set score
@@ -118,8 +146,8 @@ const Airline = (props) => {
   if (reviews && reviews.length > 0) {
     total = reviews.reduce((total, review) => total + review.attributes.score, 0)
     average = total > 0 ? (parseFloat(total) / parseFloat(reviews.length)) : 0
-    
-    userReviews = reviews.map( (review, index) => {
+    const sortedReviews = reviews.sort((a, b) => new Date(b.attributes.created_at) - new Date(a.attributes.created_at));
+    userReviews = sortedReviews.map( (review, index) => {
       return (
         <Review
           key={index}

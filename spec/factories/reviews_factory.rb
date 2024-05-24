@@ -6,7 +6,7 @@ FactoryBot.define do
     description { 'This is the description' }
     score { 3 }
 
-    # user
+    user
     airline
   end
 end
