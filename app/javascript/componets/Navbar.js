@@ -32,7 +32,6 @@ const Left = styled.div`
 `
 
 const Right = styled.div`
-  flex-basis: 12%;
   align-self: flex-end !important;
   margin-right: 24px;
 
@@ -50,6 +49,9 @@ const Menu = styled.ul`
   padding:0;
   margin:0;
   list-style-type: none;
+  li {
+    padding-left: 10px;
+  }
 `
 
 const Logo = styled.span`
@@ -69,7 +71,7 @@ const Logo = styled.span`
 const Navbar = (props) => {
   return (
     <AuthConsumer>
-      { ({ isAuth, logout }) => (
+      { ({ isAuth, role, logout }) => (
         <Wrapper>
           <Container>
             <Nav>
@@ -82,6 +84,7 @@ const Navbar = (props) => {
                     isAuth ? 
                     <Fragment>
                       <li><Link to="/">Home</Link></li>
+                      {role && role === 'admin' && <li><Link to="/">Add Airline</Link></li>}
                       <li><a onClick={logout}>Log Out</a></li>
                     </Fragment> :
                     <Fragment>

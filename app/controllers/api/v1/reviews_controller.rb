@@ -21,7 +21,7 @@ module Api
         review = current_user.reviews.find(params[:id])
 
         if review.destroy
-          head :no_content
+          render json: { message: 'Destroyed successfully' }, status: :ok
         else
           render json: errors(review), status: :unprocessable_entity
         end

@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  enum roles: { regular: 'regular', admin: 'admin' }, _default: :regular
+  enum roles: { regular: 'regular', admin: 'admin' }
 
   before_create :default_role, unless: -> { role.present? }
 

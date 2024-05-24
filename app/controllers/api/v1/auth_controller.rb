@@ -24,7 +24,7 @@ module Api
 
       def logged_in
         if current_user
-          render json: { email: current_user&.email, logged_in: true }, status: :ok
+          render json: { email: current_user&.email, role: current_user&.role, logged_in: true }, status: :ok
         else
           render json: { logged_in: false }, status: :ok
         end

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Rating from '../Rating/Rating'
+import { AuthConsumer } from '../AuthContext'
 
 const Card = styled.div`
   border: 1px solid #efefef;
@@ -61,9 +62,13 @@ const Airline = ({ name, image_url, average_score, slug, ...props }) => {
         {name}
       </AirlineName>
       <Rating score={average_score} />
-      <LinkWrapper>
-        <Link to={"/airlines/" + slug}>View Airline</Link>
-      </LinkWrapper>
+        <AuthConsumer>
+            { ({ isAuth }) => (
+                <LinkWrapper>
+                    {isAuth ? <Link to={"/airlines/" + slug}>View Airline</Link> : <Link to={'/login'}>Login to view</Link>}
+                </LinkWrapper>
+            )}
+        </AuthConsumer>
     </Card>
   )
 }

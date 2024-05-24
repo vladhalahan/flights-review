@@ -65,6 +65,7 @@ class AuthProvider extends Component {
         .then(_resp => {
           this.setState({ isAuth: false });
           window.location.href = '/'
+          window.location.reload()
         })
         .catch(err => console.log(err));
   }
@@ -75,6 +76,7 @@ class AuthProvider extends Component {
             value={{
               isAuth: this.state.isAuth,
               email: this.state.email,
+              role: this.state.role,
               signup: this.signup,
               login: this.login,
               logout: this.logout,

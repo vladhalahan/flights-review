@@ -12,7 +12,7 @@ const Authenticate = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      auth = { isAuth: data.logged_in, email: data.email };
+      auth = { isAuth: data.logged_in, email: data.email, role: data.role };
     } else {
       console.log('Error:', response.statusText);
     }

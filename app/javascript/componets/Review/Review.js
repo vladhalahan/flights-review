@@ -88,10 +88,7 @@ const Review = ({attributes, ...props}) => {
               email === attributes.email &&
               <Options>
                 <Icon onClick={props.handleDestroy.bind(this, props.id)}>
-                  <i className="fa fa-trash"></i>
-                </Icon>
-                <Icon>
-                  <i className="fa fa-pencil"></i>
+                  <i className="fa fa-trash" aria-hidden="true"></i>
                 </Icon>
               </Options>
             }
