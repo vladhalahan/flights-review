@@ -135,10 +135,10 @@ const Airline = (props) => {
   }
 
   // Destroy a airline
-  const handleAirlineDestroy = (id, e) => {
+  const handleAirlineDestroy = (slug, e) => {
     e.preventDefault();
 
-    fetch(`/api/v1/airlines/${id}`, {
+    fetch(`/api/v1/airlines/${slug}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ const Airline = (props) => {
           <Column>
             <Main>
               <Details
-                id={airline.id}
+                slug={airlineAttributes.slug}
                 attributes={airlineAttributes}
                 reviews={reviews}
                 average={average}

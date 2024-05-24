@@ -41,9 +41,7 @@ module Api
 
       # DELETE /api/v1/airlines/:slug
       def destroy
-        line = Airline.find(params[:slug])
-
-        if line.destroy
+        if airline.destroy
           render json: { message: 'Destroyed successfully' }, status: :ok
         else
           render json: errors(airline), status: :unprocessable_entity
