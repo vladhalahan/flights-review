@@ -8,6 +8,7 @@ module Api
       # POST /api/v1/reviews
       def create
         review = current_user.reviews.new(review_params)
+        authorize review
 
         if review.save
           render json: serializer(review)
@@ -19,6 +20,7 @@ module Api
       # DELETE /api/v1/reviews/:id
       def destroy
         review = current_user.reviews.find(params[:id])
+        authorize review
 
         if review.destroy
           render json: { message: 'Destroyed successfully' }, status: :ok

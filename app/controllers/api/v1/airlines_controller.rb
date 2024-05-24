@@ -4,8 +4,8 @@ module Api
   module V1
     class AirlinesController < ApiController
 
-      # TODO: allow only admin user to make CRUD
       before_action :authenticate, only: %i[create update destroy]
+      before_action :authorize_user, only: %i[show create update destroy]
 
       # GET /api/v1/airlines
       def index
@@ -41,14 +41,20 @@ module Api
 
       # DELETE /api/v1/airlines/:slug
       def destroy
-        if airline.destroy
-          head :no_content
+        line = Airline.find(params[:slug])
+
+        if line.destroy
+          render json: { message: 'Destroyed successfully' }, status: :ok
         else
           render json: errors(airline), status: :unprocessable_entity
         end
       end
 
       private
+
+      def authorize_user
+        authorize Airline
+      end
 
       # Used For compound documents with fast_jsonapi
       def options

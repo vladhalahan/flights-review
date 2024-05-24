@@ -5,6 +5,7 @@ import Login from './Auth/Login'
 import Register from './Auth/Register'
 import Airlines from './Airlines/Airlines'
 import Airline from './Airline/Airline'
+import CreateAirline from './Airline/CreateAirline'
 import Navbar from './Navbar'
 import {AuthProvider} from './AuthContext'
 import ProtectedRoute from './ProtectedRoute'
@@ -17,6 +18,7 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={Airlines} />
                 <ProtectedRoute exact path="/airlines/:slug" component={Airline} />
+                <ProtectedRoute exact path="/create-airline" component={CreateAirline} />
                 <UnprotectedRoute path="/login" component={Login}/>
                 <UnprotectedRoute exact path="/register" component={Register} />
             </Switch>

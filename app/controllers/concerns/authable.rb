@@ -3,8 +3,6 @@
 module Authable
   extend ActiveSupport::Concern
 
-  include Pundit::Authorization
-
   included do
     before_action :current_user
   end

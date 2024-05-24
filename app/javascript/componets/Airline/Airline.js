@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import styled from 'styled-components'
-import Header from './Header'
+import Details from './Details'
 import Review from '../Review/Review'
 import ReviewForm from '../Review/ReviewForm'
 import GetCSRFToken from '../../utils/Helpers/GetCSRFToken'
@@ -97,7 +97,7 @@ const Airline = (props) => {
           let errorMessage;
           switch (error.message) {
             case 'Request failed with status code 401':
-              errorMessage = 'Please log in to leave a review.';
+              errorMessage = 'You have no permissions to perform this action.';
               break;
             default:
               errorMessage = 'Something went wrong.';
@@ -134,6 +134,30 @@ const Airline = (props) => {
         .catch(error => console.log('Error', error));
   }
 
+  // Destroy a airline
+  const handleAirlineDestroy = (id, e) => {
+    e.preventDefault();
+
+    fetch(`/api/v1/airlines/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': GetCSRFToken(),
+      },
+      credentials: 'include'
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          window.location.href = '/'
+        })
+        .catch(error => console.log('Error', error));
+  }
+
   // set score
   const setRating = (score, e) => {
     e.preventDefault()  
@@ -166,10 +190,12 @@ const Airline = (props) => {
         <Fragment>
           <Column>
             <Main>
-              <Header 
+              <Details
+                id={airline.id}
                 attributes={airlineAttributes}
                 reviews={reviews}
                 average={average}
+                handleAirlineDestroy={handleAirlineDestroy}
               />
               {userReviews}
             </Main>

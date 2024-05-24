@@ -84,7 +84,7 @@ const Navbar = (props) => {
                     isAuth ? 
                     <Fragment>
                       <li><Link to="/">Home</Link></li>
-                      {role && role === 'admin' && <li><Link to="/">Add Airline</Link></li>}
+                      {role && role === 'admin' && <li><Link to="/create-airline">Add Airline</Link></li>}
                       <li><a onClick={logout}>Log Out</a></li>
                     </Fragment> :
                     <Fragment>
