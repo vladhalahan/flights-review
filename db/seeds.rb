@@ -5,3 +5,4 @@
 
 # Seeding admin user
 User.create(email: 'admin@example.com', password: 'password', role: User.roles[:admin])
+User.create(email: 'another@example.com', password: 'password')
