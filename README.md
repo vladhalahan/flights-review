@@ -14,6 +14,8 @@ This app is intended to be a simple example of a CRUD app built with **Ruby on R
 
 ---
 ## Running it locally
+- run `rvm use 3.2.2`
+- run `bundle install`
 - run `rails db:prepare`
 - run `yarn install`
 - run `bundle exec rails s`
