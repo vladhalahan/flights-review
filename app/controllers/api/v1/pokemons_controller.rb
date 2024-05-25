@@ -19,12 +19,12 @@ module Api
 
       # POST /api/v1/pokemons
       def create
-        pokemon = Pokemon.new(pokemon_params)
+        command = Pokemons::Create.call(pokemon_params)
 
-        if pokemon.save
-          render json: serializer(pokemon)
+        if command.success?
+          render json: serializer(command.result)
         else
-          render json: errors(pokemon), status: :unprocessable_entity
+          render json: command.errors, status: :unprocessable_entity
         end
       end
 
@@ -60,7 +60,7 @@ module Api
 
       # Strong params
       def pokemon_params
-        params.require(:pokemon).permit(:name, :image_url)
+        params.require(:pokemon).permit(:name)
       end
 
       # fast_jsonapi serializer

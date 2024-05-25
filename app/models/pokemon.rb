@@ -5,23 +5,22 @@
 # Table name: pokemons
 #
 #  id            :bigint           not null, primary key
+#  abilities     :text
 #  average_score :integer          default(0)
 #  image_url     :string
 #  name          :string
 #  slug          :string
+#  stats         :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 class Pokemon < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
-  before_create :slugify
-
   validates :name, uniqueness: true
 
-  def slugify
-    self.slug = name.parameterize
-  end
+  serialize :stats, Array
+  serialize :abilities, Array
 
   # Get the average score of all reviews for an pokemon
   def calculate_average

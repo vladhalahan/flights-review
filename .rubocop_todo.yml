@@ -14,3 +14,7 @@ Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
+Style/HashSyntax:
+  Enabled: false
+Rails/BulkChangeTable:
+  Enabled: false

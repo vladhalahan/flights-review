@@ -42,4 +42,11 @@ Users can create accounts with a default role of "regular user" and leave review
 By default, unauthorized users can only navigate to the root path and view the list of Pokémon. Once logged in, a regular user can create reviews on a Pokémon's page. Admin users cannot leave reviews. Instead, admin users have the ability to create and delete Pokémon entities. All authorization rules are managed by Pundit policies.
 
 ### Integrations
-There is an integration with PokeAPI that admin users can utilize to create Pokémon. The user only needs to select the Pokémon's name and submit the form. The Pokémon will be created with the specified name and its image URL.
+There is an integration with PokeAPI that admin users can utilize to create Pokémon. The user only needs to select the Pokémon's name and submit the form.
+Once backend receives the pokemons POST it triggers `Pokemons::Create` service which implements SimmpleCommand pattern. It makes additional HTTP request to PokeAPI to get additional stats data for certain pokemon record.
+
+`ExternalApi::BaseClient` implements simple HTTParty wrapper which we can use for collection stats data via `ExternalApi::Poke::StatsRetriever` and handles response by `ResponseProcessor`.
+
+### Coverage
+#### TODO: add GH actions
+![img_2.png](img_2.png)

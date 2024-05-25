@@ -10,17 +10,6 @@ RSpec.describe Pokemon, type: :model do
     end
   end
 
-  describe 'callbacks' do
-    describe '#slugify' do
-      let(:pokemon) { build(:pokemon, name: 'Test Pokemon') }
-
-      it 'creates a slug from the name before create' do
-        pokemon.save
-        expect(pokemon.slug).to eq('test-pokemon')
-      end
-    end
-  end
-
   describe '#calculate_average' do
     let(:pokemon) { create(:pokemon) }
 

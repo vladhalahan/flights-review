@@ -69,7 +69,7 @@ const PokemonForm = (props) =>{
                     <select onChange={props.handleChange} name="name" value={props.pokemon.title}>
                         <option value="" disabled>Select Pokemon Name</option>
                         {props.availableNames.map((option) => (
-                            <option key={option.imageUrl} value={option.name}>
+                            <option key={option.url} value={option.name}>
                                 {option.name}
                             </option>
                         ))}

@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :pokemon do
     name { 'Fake Pokemon' }
+    slug { 'fake-pokemon' }
   end
 end

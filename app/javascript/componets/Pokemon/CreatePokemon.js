@@ -46,17 +46,7 @@ const CreatePokemon = (props) => {
             try {
                 const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=30');
                 const data = await response.json();
-                const promises = data.results.map(async (pokemon) => {
-                    const pokemonDetailsResponse = await fetch(pokemon.url);
-                    const pokemonDetails = await pokemonDetailsResponse.json();
-                    return {
-                        name: pokemon.name,
-                        imageUrl: pokemonDetails.sprites.front_default,
-                    };
-                });
-
-                const detailedPokemonList = await Promise.all(promises);
-                setOptionsList(detailedPokemonList);
+                setOptionsList(data.results);
             } catch (error) {
                 console.error('Error fetching names list:', error);
             }

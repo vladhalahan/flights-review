@@ -29,19 +29,52 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
   end
 
   describe 'POST /api/v1/pokemons' do
-    it 'creates a new pokemon' do
-      pokemon_params = {
-        pokemon: {
-          name: 'Pikachu',
-          image_url: 'https://example.com/pikachu.png'
+    context 'when the request is valid' do
+      let(:pokemon_params) do
+        {
+          pokemon: {
+            name: 'Pikachu',
+          }
         }
-      }
+      end
+      let(:pokemon) { create(:pokemon, name: pokemon_params[:pokemon][:name], slug: pokemon_params[:pokemon][:name].parameterize) }
+      let(:command) { instance_double(Pokemons::Create, success?: true, result: pokemon) }
 
-      post '/api/v1/pokemons', params: pokemon_params
+      before do
+        allow(Pokemons::Create).to receive(:call).and_return(command)
+      end
 
-      expect(response).to have_http_status(:ok)
-      expect(json['data']).to have_key('id')
-      expect(json['data']['attributes']['name']).to eq('Pikachu')
+      it 'creates a new pokemon' do
+        post '/api/v1/pokemons', params: pokemon_params
+
+        expect(response).to have_http_status(:ok)
+        expect(json['data']).to have_key('id')
+        expect(json['data']['attributes']['name']).to eq('Pikachu')
+      end
+    end
+
+    context 'when the request is invalid' do
+      let(:pokemon_params) do
+        {
+          pokemon: {
+            name: '',
+            image_url: 'https://example.com/pikachu.png'
+          }
+        }
+      end
+      let(:errors) { { name: ["can't be blank"] } }
+      let(:command) { instance_double(Pokemons::Create, success?: false, errors: errors) }
+
+      before do
+        allow(Pokemons::Create).to receive(:call).and_return(command)
+      end
+
+      it 'returns validation errors' do
+        post '/api/v1/pokemons', params: pokemon_params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(json).to eq(errors.stringify_keys)
+      end
     end
   end
 
