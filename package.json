@@ -1,5 +1,5 @@
 {
-  "name": "flights-review",
+  "name": "pokemons-review",
   "private": true,
   "engines": {
     "node": "18.4.0"
