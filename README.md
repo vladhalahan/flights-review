@@ -3,10 +3,16 @@
 
 This app is intended to be a simple example of a CRUD app built with **Ruby on Rails** and **React.js** using **Webpacker**.
 
-add link to screencast here
+### Regular user behaviour
+![img1](../../Desktop/Screenshot 2024-05-25 at 19.17.17.png)
+![img2](../../Desktop/Screenshot 2024-05-25 at 19.17.35.png)
+![img3](../../Desktop/Screenshot 2024-05-25 at 19.17.54.png)
+
+### Admin user behaviour
+![img4](../../Desktop/Screenshot 2024-05-25 at 19.18.14.png)
+![img5](../../Desktop/Screenshot 2024-05-25 at 19.18.27.png)
 
 ---
-
 ## Running it locally
 - run `rails db:prepare`
 - run `yarn install`

@@ -76,7 +76,7 @@ const Navbar = (props) => {
           <Container>
             <Nav>
               <Left>
-                <Logo><Link to="/">PokemonsReview</Link></Logo>
+                <Logo><Link to="/">PokeReview</Link></Logo>
               </Left>
               <Right>
                 <Menu>
