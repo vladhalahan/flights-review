@@ -12,3 +12,5 @@
 # SupportedStyles: empty_lines, no_empty_lines
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false

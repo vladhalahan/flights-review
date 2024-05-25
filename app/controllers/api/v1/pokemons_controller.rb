@@ -4,8 +4,8 @@ module Api
   module V1
     class PokemonsController < ApiController
 
-      before_action :authenticate, only: %i[create update destroy]
-      before_action :authorize_user, only: %i[show create update destroy]
+      before_action :authenticate, only: %i[create destroy]
+      before_action :authorize_user, only: %i[show create destroy]
 
       # GET /api/v1/pokemons
       def index
@@ -23,17 +23,6 @@ module Api
 
         if pokemon.save
           render json: serializer(pokemon)
-        else
-          render json: errors(pokemon), status: :unprocessable_entity
-        end
-      end
-
-      # PATCH /api/v1/pokemons/:slug
-      def update
-        pokemon = Pokemon.find_by(slug: params[:slug])
-
-        if pokemon.update(pokemon_params)
-          render json: serializer(pokemon, options)
         else
           render json: errors(pokemon), status: :unprocessable_entity
         end
