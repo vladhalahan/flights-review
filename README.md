@@ -74,5 +74,11 @@ Once backend receives the pokemons POST it triggers `Pokemons::Create` service w
 `ExternalApi::BaseClient` implements simple HTTParty wrapper which we can use for collection stats data via `ExternalApi::Poke::StatsRetriever` and handles response by `ResponseProcessor`.
 
 ### Coverage
-#### TODO: add GH actions
 ![img_2.png](img_2.png)
+
+
+## TODO
+- Add Graphql as V2
+- FE components raw refactor
+- Implement MaterialUI instead of styled-components
+- Add Github Actions
