@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_24_110543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "airlines", force: :cascade do |t|
+  create_table "pokemons", force: :cascade do |t|
     t.string "name"
     t.string "slug"
     t.string "image_url"
@@ -27,11 +27,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_24_110543) do
     t.string "title"
     t.string "description"
     t.integer "score"
-    t.bigint "airline_id", null: false
+    t.bigint "pokemon_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["airline_id"], name: "index_reviews_on_airline_id"
+    t.index ["pokemon_id"], name: "index_reviews_on_pokemon_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -44,6 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_24_110543) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "reviews", "airlines"
+  add_foreign_key "reviews", "pokemons"
   add_foreign_key "reviews", "users"
 end

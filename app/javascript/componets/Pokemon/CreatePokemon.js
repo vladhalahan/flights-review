@@ -1,7 +1,7 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import GetCSRFToken from '../../utils/Helpers/GetCSRFToken'
 import styled from 'styled-components'
-import AirlineForm from './AirlineForm'
+import PokemonForm from './PokemonForm'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -32,26 +32,51 @@ const Main = styled.div`
   padding-left: 60px;
 `
 
-const CreateAirline = (props) => {
-    const [airline, setAirline] = useState({})
+const CreatePokemon = (props) => {
+    const [pokemon, setPokemon] = useState({})
+    const [optionsList, setOptionsList] = useState([]);
     const [error, setError] = useState('')
 
     const handleChange = (e) => {
-        setAirline(Object.assign({}, airline, {[e.target.name]: e.target.value}))
+        setPokemon(Object.assign({}, pokemon, {[e.target.name]: e.target.value, image_url: optionsList.find(p => p.name.toLowerCase() === e.target.value.toLowerCase()).imageUrl}))
     }
+
+    useEffect(() => {
+        const fetchNameList = async () => {
+            try {
+                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=30');
+                const data = await response.json();
+                const promises = data.results.map(async (pokemon) => {
+                    const pokemonDetailsResponse = await fetch(pokemon.url);
+                    const pokemonDetails = await pokemonDetailsResponse.json();
+                    return {
+                        name: pokemon.name,
+                        imageUrl: pokemonDetails.sprites.front_default,
+                    };
+                });
+
+                const detailedPokemonList = await Promise.all(promises);
+                setOptionsList(detailedPokemonList);
+            } catch (error) {
+                console.error('Error fetching names list:', error);
+            }
+        };
+
+        fetchNameList();
+    }, []);
 
     // Create review
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/v1/airlines', {
+        fetch('/api/v1/pokemons', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-Token': GetCSRFToken(),
             },
             credentials: 'include',
-            body: JSON.stringify({ ...airline })
+            body: JSON.stringify({ ...pokemon })
         })
             .then(response => {
                 if (!response.ok) {
@@ -81,13 +106,13 @@ const CreateAirline = (props) => {
             <Fragment>
                 <Column>
                     <Main>
-                        <h1>Add New Airline</h1>
-                        <p>tip: example image URL https://open-flights.s3.amazonaws.com/JetBlue.png</p>
+                        <h1>Add New Pokemon</h1>
                     </Main>
                 </Column>
                 <Column>
-                    <AirlineForm
-                        airline={airline}
+                    <PokemonForm
+                        pokemon={pokemon}
+                        availableNames={optionsList}
                         handleChange={handleChange}
                         handleSubmit={handleSubmit}
                         error={error}
@@ -98,4 +123,4 @@ const CreateAirline = (props) => {
     )
 }
 
-export default CreateAirline
+export default CreatePokemon

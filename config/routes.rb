@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :airlines, param: :slug
+      resources :pokemons, param: :slug
       resources :reviews, only: %i[create destroy]
       resources :auth, only: %i[create] do
         collection do

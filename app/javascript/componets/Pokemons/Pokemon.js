@@ -9,7 +9,7 @@ const Card = styled.div`
   background: #fff;
 `
 
-const AirlineLogo = styled.div`
+const PokemonLogo = styled.div`
   height: 50px;
 
   img {
@@ -20,7 +20,7 @@ const AirlineLogo = styled.div`
   }
 `
 
-const AirlineName = styled.div`
+const PokemonName = styled.div`
   padding: 20px 0 10px 0;
 `
 
@@ -52,20 +52,20 @@ const LinkWrapper = styled.div`
   }
 `
 
-const Airline = ({ name, image_url, average_score, slug, ...props }) => {
+const Pokemon = ({ name, image_url, average_score, slug, ...props }) => {
   return (
     <Card>
-      <AirlineLogo>
+      <PokemonLogo>
         <img src={image_url} alt={name} width="50"/>
-      </AirlineLogo>
-      <AirlineName>
+      </PokemonLogo>
+      <PokemonName>
         {name}
-      </AirlineName>
+      </PokemonName>
       <Rating score={average_score} />
         <AuthConsumer>
             { ({ isAuth }) => (
                 <LinkWrapper>
-                    {isAuth ? <Link to={"/airlines/" + slug}>View Airline</Link> : <Link to={'/login'}>Login to view</Link>}
+                    {isAuth ? <Link to={"/pokemons/" + slug}>View Pokemon</Link> : <Link to={'/login'}>Login to view</Link>}
                 </LinkWrapper>
             )}
         </AuthConsumer>
@@ -73,4 +73,4 @@ const Airline = ({ name, image_url, average_score, slug, ...props }) => {
   )
 }
 
-export default Airline
+export default Pokemon

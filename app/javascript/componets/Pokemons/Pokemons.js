@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Airline from './Airline'
+import Pokemon from './Pokemon'
 import Header from './Header'
 import styled from 'styled-components'
 
@@ -24,29 +24,29 @@ const Grid = styled.div`
   }
 `
 
-const Airlines = () => {
-  const [airlines, setAirlines] = useState([]);
+const Pokemons = () => {
+  const [pokemons, setPokemons] = useState([]);
 
   async function fetchData() {
-    let resourceURL = '/api/v1/airlines.json'
+    let resourceURL = '/api/v1/pokemons.json'
 
     return await (await fetch(resourceURL, { method: 'GET' })).json()
   }
 
-  const fetchAirlines = async () => {
+  const fetchPokemons = async () => {
     let response = await fetchData()
-    setAirlines(response.data)
+    setPokemons(response.data)
   }
 
   useEffect(() => {
-    fetchAirlines()
+    fetchPokemons()
   }, [])
 
-  const grid = airlines.map( (airline, index) => {
-    const { name, image_url, slug, average_score } = airline.attributes
+  const grid = pokemons.map( (pokemon, index) => {
+    const { name, image_url, slug, average_score } = pokemon.attributes
 
     return (
-      <Airline
+      <Pokemon
         key={index}
         name={name}
         image_url={image_url}
@@ -64,4 +64,4 @@ const Airlines = () => {
   )
 }
 
-export default Airlines
+export default Pokemons

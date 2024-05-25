@@ -50,7 +50,7 @@ const Details = ({attributes, reviews, average, ...props}) => {
           { ({ role }) => (
               <Wrapper>
                   <h1><img src={image_url} height="50" width="50" alt={name} /> {name}</h1>
-                  {role === 'admin' && <DestroyBtn onClick={props.handleAirlineDestroy.bind(this, props.slug)}>Destroy</DestroyBtn>}
+                  {role === 'admin' && <DestroyBtn onClick={props.handlePokemonDestroy.bind(this, props.slug)}>Destroy</DestroyBtn>}
                   <div>
                       <UserReviewCount>
                           <span className="review-count">{reviews ? reviews.length : 0}</span> user reviews

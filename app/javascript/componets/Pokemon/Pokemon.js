@@ -34,9 +34,9 @@ const Main = styled.div`
   padding-left: 60px;
 `
 
-const Airline = (props) => {
-  const [airline, setAirline] = useState({})
-  const [airlineAttributes, setAirlineAttributes] = useState({})
+const Pokemon = (props) => {
+  const [pokemon, setPokemon] = useState({})
+  const [pokemonAttributes, setPokemonAttributes] = useState({})
   const [reviews, setReviews] = useState([])
   const [review, setReview] = useState({ title: '', description: '', score: 0 })
   const [error, setError] = useState('')
@@ -45,22 +45,22 @@ const Airline = (props) => {
 
   async function fetchData() {
     const slug = props.match.params.slug
-    let resourceURL = `/api/v1/airlines/${slug}`
+    let resourceURL = `/api/v1/pokemons/${slug}`
 
     return await (await fetch(resourceURL, { method: 'GET', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': GetCSRFToken() }})).json()
   }
 
-  const fetchAirlineData = async () => {
+  const fetchPokemonData = async () => {
     let response = await fetchData()
 
-    setAirline(response.data)
-    setAirlineAttributes(response.data.attributes)
+    setPokemon(response.data)
+    setPokemonAttributes(response.data.attributes)
     setReviews(response.included)
     setLoaded(true)
   }
 
   useEffect(()=> {
-    fetchAirlineData()
+    fetchPokemonData()
   }, [])
 
   // Modify text in review form
@@ -72,7 +72,7 @@ const Airline = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const airline_id = parseInt(airline.id);
+    const pokemon_id = parseInt(pokemon.id);
     fetch('/api/v1/reviews', {
       method: 'POST',
       headers: {
@@ -80,7 +80,7 @@ const Airline = (props) => {
         'X-CSRF-Token': GetCSRFToken(),
       },
       credentials: 'include',
-      body: JSON.stringify({ ...review, airline_id })
+      body: JSON.stringify({ ...review, pokemon_id })
     })
         .then(response => {
           if (!response.ok) {
@@ -137,11 +137,11 @@ const Airline = (props) => {
         .catch(error => console.log('Error', error));
   }
 
-  // Destroy a airline
-  const handleAirlineDestroy = (slug, e) => {
+  // Destroy a pokemon
+  const handlePokemonDestroy = (slug, e) => {
     e.preventDefault();
 
-    fetch(`/api/v1/airlines/${slug}`, {
+    fetch(`/api/v1/pokemons/${slug}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -194,18 +194,18 @@ const Airline = (props) => {
           <Column>
             <Main>
               <Details
-                slug={airlineAttributes.slug}
-                attributes={airlineAttributes}
+                slug={pokemonAttributes.slug}
+                attributes={pokemonAttributes}
                 reviews={reviews}
                 average={average}
-                handleAirlineDestroy={handleAirlineDestroy}
+                handlePokemonDestroy={handlePokemonDestroy}
               />
               {userReviews}
             </Main>
           </Column>
           <Column>
             <ReviewForm
-              name={airlineAttributes.name}
+              name={pokemonAttributes.name}
               review={review}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
@@ -219,4 +219,4 @@ const Airline = (props) => {
   )
 }
 
-export default Airline
+export default Pokemon

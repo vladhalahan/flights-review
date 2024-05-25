@@ -7,6 +7,6 @@ FactoryBot.define do
     score { 3 }
 
     user
-    airline
+    pokemon
   end
 end

@@ -1,28 +1,24 @@
 # frozen_string_literal: true
 
-Airline.create([
+# Seeding pokemons
+Pokemon.create([
                  {
-                   name: 'United Airlines',
-                   image_url: 'https://open-flights.s3.amazonaws.com/United-Airlines.png'
+                   name: 'wartortle',
+                   image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png'
                  },
                  {
-                   name: 'Southwest',
-                   image_url: 'https://open-flights.s3.amazonaws.com/Southwest-Airlines.png'
+                   name: 'kakuna',
+                   image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png'
                  },
                  {
-                   name: 'Delta',
-                   image_url: 'https://open-flights.s3.amazonaws.com/Delta.png'
+                   name: 'pidgeot',
+                   image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png'
                  },
                  {
-                   name: 'Alaska Airlines',
-                   image_url: 'https://open-flights.s3.amazonaws.com/Alaska-Airlines.png'
-                 },
-                 {
-                   name: 'JetBlue',
-                   image_url: 'https://open-flights.s3.amazonaws.com/JetBlue.png'
-                 },
-                 {
-                   name: 'American Airlines',
-                   image_url: 'https://open-flights.s3.amazonaws.com/American-Airlines.png'
+                   name: 'weedle',
+                   image_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png'
                  },
                ])
+
+# Seeding admin user
+User.create(email: 'admin@example.com', password: 'password', role: User.roles[:admin])

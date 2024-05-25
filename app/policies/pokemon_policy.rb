@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AirlinePolicy < ApplicationPolicy
+class PokemonPolicy < ApplicationPolicy
 
   def create?
     user.admin?

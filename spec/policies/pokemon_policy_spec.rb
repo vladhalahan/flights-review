@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AirlinePolicy do
+RSpec.describe PokemonPolicy do
   subject { described_class }
 
   let(:admin) { create(:user, :admin) }

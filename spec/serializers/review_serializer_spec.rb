@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe ReviewSerializer, type: :serializer do
   describe 'serialization' do
-    let(:airline) { create(:airline) }
-    let(:review) { create(:review, title: 'Great Service', description: 'Excellent flight experience', score: 5, airline:) }
+    let(:pokemon) { create(:pokemon) }
+    let(:review) { create(:review, title: 'Great Service', description: 'Excellent flight experience', score: 5, pokemon:) }
     let(:serializer) { described_class.new(review) }
     let(:serialization) { serializer.serializable_hash }
 
@@ -14,7 +14,7 @@ RSpec.describe ReviewSerializer, type: :serializer do
         title: 'Great Service',
         description: 'Excellent flight experience',
         score: 5,
-        airline_id: airline.id
+        pokemon_id: pokemon.id
       )
     end
   end

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: airlines
+# Table name: pokemons
 #
 #  id            :bigint           not null, primary key
 #  average_score :integer          default(0)
@@ -12,16 +12,18 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-class Airline < ApplicationRecord
+class Pokemon < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   before_create :slugify
+
+  validates :name, uniqueness: true
 
   def slugify
     self.slug = name.parameterize
   end
 
-  # Get the average score of all reviews for an airline
+  # Get the average score of all reviews for an pokemon
   def calculate_average
     return 0 unless reviews.size.positive?
 

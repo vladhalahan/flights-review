@@ -34,7 +34,6 @@ const Input = styled.input`
   background-repeat: no-repeat;
   background-position: right 8px center;
   border: 1px solid #d1d5da;
-  border-radius: 3px;
   outline: none;
   box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
   width: 100%;

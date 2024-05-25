@@ -76,7 +76,7 @@ const Navbar = (props) => {
           <Container>
             <Nav>
               <Left>
-                <Logo><Link to="/">FlightsReview</Link></Logo>
+                <Logo><Link to="/">PokemonsReview</Link></Logo>
               </Left>
               <Right>
                 <Menu>
@@ -84,7 +84,7 @@ const Navbar = (props) => {
                     isAuth ? 
                     <Fragment>
                       <li><Link to="/">Home</Link></li>
-                      {role && role === 'admin' && <li><Link to="/create-airline">Add Airline</Link></li>}
+                      {role && role === 'admin' && <li><Link to="/create-pokemon">Add Pokemon</Link></li>}
                       <li><a onClick={logout}>Log Out</a></li>
                     </Fragment> :
                     <Fragment>

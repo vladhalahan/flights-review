@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 
 import Login from './Auth/Login'
 import Register from './Auth/Register'
-import Airlines from './Airlines/Airlines'
-import Airline from './Airline/Airline'
-import CreateAirline from './Airline/CreateAirline'
+import Pokemons from './Pokemons/Pokemons'
+import Pokemon from './Pokemon/Pokemon'
+import CreatePokemon from './Pokemon/CreatePokemon'
 import Navbar from './Navbar'
 import {AuthProvider} from './AuthContext'
 import ProtectedRoute from './ProtectedRoute'
@@ -16,9 +16,9 @@ const App = () => {
         <AuthProvider>
             <Navbar/>
             <Switch>
-                <Route exact path="/" component={Airlines} />
-                <ProtectedRoute exact path="/airlines/:slug" component={Airline} />
-                <ProtectedRoute exact path="/create-airline" component={CreateAirline} />
+                <Route exact path="/" component={Pokemons} />
+                <ProtectedRoute exact path="/pokemons/:slug" component={Pokemon} />
+                <ProtectedRoute exact path="/create-pokemon" component={CreatePokemon} />
                 <UnprotectedRoute path="/login" component={Login}/>
                 <UnprotectedRoute exact path="/register" component={Register} />
             </Switch>

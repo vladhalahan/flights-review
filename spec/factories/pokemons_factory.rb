@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :airline do
-    name { 'Fake Airline' }
+  factory :pokemon do
+    name { 'Fake Pokemon' }
   end
 end

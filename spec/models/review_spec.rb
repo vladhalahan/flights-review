@@ -4,30 +4,30 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   describe 'associations' do
-    it 'belongs to an airline' do
-      expect(described_class.reflect_on_association(:airline).macro).to eq :belongs_to
+    it 'belongs to an pokemon' do
+      expect(described_class.reflect_on_association(:pokemon).macro).to eq :belongs_to
     end
   end
 
   describe 'callbacks' do
-    let(:airline) { create(:airline) }
+    let(:pokemon) { create(:pokemon) }
     let(:user) { create(:user) }
-    let(:review) { build(:review, user:, airline:) }
+    let(:review) { build(:review, user:, pokemon:) }
 
-    it 'calls calculate_average on the airline after commit' do
-      expect(airline).to receive(:calculate_average).once
+    it 'calls calculate_average on the pokemon after commit' do
+      expect(pokemon).to receive(:calculate_average).once
       review.save!
     end
 
-    it 'calls calculate_average on the airline after update' do
+    it 'calls calculate_average on the pokemon after update' do
       review.save!
-      expect(airline).to receive(:calculate_average).once
+      expect(pokemon).to receive(:calculate_average).once
       review.update!(description: 'Updated content')
     end
 
-    it 'calls calculate_average on the airline after destroy' do
+    it 'calls calculate_average on the pokemon after destroy' do
       review.save!
-      expect(airline).to receive(:calculate_average).once
+      expect(pokemon).to receive(:calculate_average).once
       review.destroy
     end
   end

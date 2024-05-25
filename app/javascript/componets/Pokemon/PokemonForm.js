@@ -7,20 +7,19 @@ const Field = styled.div`
   input {
     width: 96%;
     min-height:50px;
-    border-radius: 4px;
     border: 1px solid #E6E6E6;
     margin: 12px 0;
     padding: 12px;
   }
   
-  textarea {
-    width: 100%;
-    min-height:80px;
-    border-radius: 4px;
+  select {
+    width: 99%;
+    min-height:45px;
     border: 1px solid #E6E6E6;
     margin: 12px 0;
-    padding: 12px;      
+    padding: 12px;
   }
+ 
 `
 
 const SubmitBtn = styled.button`
@@ -39,7 +38,7 @@ const SubmitBtn = styled.button`
   }
 `
 
-const AirlineWrapper = styled.div`
+const PokemonWrapper = styled.div`
   background:white;
   padding:20px;
   margin-left: 15px;
@@ -62,24 +61,28 @@ const Error = styled.div`
   padding: 4px;
 `
 
-const AirlineForm = (props) =>{
+const PokemonForm = (props) =>{
     return (
-        <AirlineWrapper>
+        <PokemonWrapper>
             <form onSubmit={props.handleSubmit}>
                 <Field>
-                    <input onChange={props.handleChange} type="text" name="name" placeholder="Airline Name" value={props.airline.title}/>
+                    <select onChange={props.handleChange} name="name" value={props.pokemon.title}>
+                        <option value="" disabled>Select Pokemon Name</option>
+                        {props.availableNames.map((option) => (
+                            <option key={option.imageUrl} value={option.name}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
                 </Field>
-                <Field>
-                    <input onChange={props.handleChange} type="text" name="image_url" placeholder="Airline Logo URL" value={props.airline.image_url}/>
-                </Field>
-                <SubmitBtn type="Submit">Create Airline</SubmitBtn>
+                <SubmitBtn type="Submit">Create Pokemon</SubmitBtn>
                 {
                     props.error &&
                     <Error>{props.error}</Error>
                 }
             </form>
-        </AirlineWrapper>
+        </PokemonWrapper>
     )
 }
 
-export default AirlineForm
+export default PokemonForm

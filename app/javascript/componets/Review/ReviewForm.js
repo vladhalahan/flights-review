@@ -47,12 +47,10 @@ const RatingBox = styled.div`
 `
 
 const Field = styled.div`
-  border-radius: 4px;
 
   input {
     width: 96%;
     min-height:50px;
-    border-radius: 4px;
     border: 1px solid #E6E6E6;
     margin: 12px 0;
     padding: 12px;
@@ -61,7 +59,6 @@ const Field = styled.div`
   textarea {
     width: 100%;
     min-height:80px;
-    border-radius: 4px;
     border: 1px solid #E6E6E6;
     margin: 12px 0;
     padding: 12px;      
@@ -142,7 +139,7 @@ const ReviewForm = (props) =>{
         </Field>
         <Field>
           <RatingContainer>
-            <RatingBoxTitle>Rate This Airline</RatingBoxTitle>
+            <RatingBoxTitle>Rate This Pokemon</RatingBoxTitle>
             <RatingBox>
               {ratingOptions}
             </RatingBox>
