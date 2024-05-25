@@ -84,6 +84,9 @@ const CreatePokemon = (props) => {
                     case 'Request failed with status code 401':
                         errorMessage = 'You have no permissions to perform this action.';
                         break;
+                    case 'Request failed with status code 422':
+                        errorMessage = 'Validation failed: Name is already been taken';
+                        break;
                     default:
                         errorMessage = 'Something went wrong.';
                 }

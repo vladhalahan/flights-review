@@ -33,13 +33,33 @@ add link to screencast here
                     api_v1_registrations POST   /api/v1/registrations(.:format)                                                                   api/v1/registrations#create
 ```
 
+### Seeds
+By default app generates seeds with 4 sample Pokemons and 2 users: regular and admin user
+
+#### Creds for login
+- Admin user `email: admin@example.com, password: password`
+- Regular user `email: another@example.com, password: password`
+
 ## Features
 
 ### Authentication
 Users can create accounts with a default role of "regular user" and leave reviews for any Pokémon. An admin role can be created by running rails db:seed or directly from the console.
 
 ### Authorization
-By default, unauthorized users can only navigate to the root path and view the list of Pokémon. Once logged in, a regular user can create reviews on a Pokémon's page. Admin users cannot leave reviews. Instead, admin users have the ability to create and delete Pokémon entities. All authorization rules are managed by Pundit policies.
+By default, unauthorized users can only navigate to the root path and view the list of Pokémon. Once logged in, a regular user can create reviews on a Pokémon's page. Admin users cannot leave reviews.
+Instead, admin users have the ability to create and delete Pokémon entities. All authorization rules are managed by Pundit policies.
+
+### Permissions
+
+| Action/Role    |   Admin  | Regular  |
+|----------------|----------|----------|
+| Login          | YES      | YES      |
+| Signup         | NO       | YES      |
+| View Pokemon   | YES      | YES      |
+| Add Pokemon    | YES      | NO       |
+| Delete Pokemon | YES      | NO       |
+| Add Review     | NO       | YES      |
+| Delete Review  | NO       | YES      |
 
 ### Integrations
 There is an integration with PokeAPI that admin users can utilize to create Pokémon. The user only needs to select the Pokémon's name and submit the form.
