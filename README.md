@@ -4,13 +4,13 @@
 This app is intended to be a simple example of a CRUD app built with **Ruby on Rails** and **React.js** using **Webpacker**.
 
 ### Regular user behaviour
-![img1](public/Screenshot 2024-05-25 at 19.17.17.png)
-![img2](public/Screenshot 2024-05-25 at 19.17.35.png)
-![img3](public/Screenshot 2024-05-25 at 19.17.54.png)
+![regular-user-1.png](regular-user-1.png)
+![regular-user-2.png](regular-user-2.png)
+![regular-user-3.png](regular-user-3.png)
 
 ### Admin user behaviour
-![img4](public/Screenshot 2024-05-25 at 19.18.14.png)
-![img5](public/Screenshot 2024-05-25 at 19.18.27.png)
+![admin-user-1.png](admin-user-1.png)
+![admin-user-1.png](admin-user-1.png)
 
 ---
 ## Running it locally
