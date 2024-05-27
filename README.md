@@ -13,14 +13,59 @@ This app is intended to be a simple example of a CRUD app built with **Ruby on R
 ![admin-user-2.png](admin-user-2.png)
 
 ---
-## Running it locally
-- run `rvm use 3.2.2`
-- run `bundle install`
-- run `rails db:prepare`
-- run `yarn install`
-- run `bundle exec rails s`
-- in another tab run `./bin/webpack-dev-server` (optional)
-- navigate to `http://localhost:3000`
+## Prerequisites: ENV setup
+Create `.env` and copy the needed variables from `.env.example`
+
+```shell
+touch .env && cp .env.example .env
+```
+
+## Running it locally with Docker
+
+To setup the app locally with docker-compose:
+
+1. Install Docker
+2. Run build
+   ```bash
+   docker-compose build
+   ```
+4. Bundle install & rails database setup:
+
+   ```bash
+   docker-compose run --rm rails rails db:prepare
+   docker-compose run --rm rails rails db:seed
+   ```
+
+5. Run Rails:
+
+   ```bash
+   docker-compose up
+   ```
+
+## Other commands
+
+To run Rails:
+
+```bash
+docker-compose up
+```
+
+To stop the running application(s): `Ctrl-C`
+
+To stop all services:
+
+```bash
+docker-compose down
+```
+
+Access your local server at <http://localhost:3000>
+
+**NOTE: THIS WILL DELETE ALL LOCAL CONTAINERS, IMAGES, CONTAINERS, VOLUMES, etc.**
+To clean up Docker (for rebuilding your local environment):
+
+```bash
+docker system prune -a && docker volume prune
+```
 
 ## Routes
 ```shell

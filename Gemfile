@@ -65,6 +65,7 @@ group :development, :test do
   gem 'rubocop-rake', require: false
   gem 'factory_bot_rails', '~> 4.11.1', require: false
   gem 'faker', '~> 2.19.0'
+  gem 'dotenv'
 end
 
 group :development do

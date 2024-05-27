@@ -18,7 +18,7 @@ module ExternalApi
       attr_reader :name
 
       def endpoint
-        @endpoint ||= "https://pokeapi.co/api/v2/pokemon/#{name}"
+        @endpoint ||= "#{ENV['POKE_API_HOST']}/api/v2/pokemon/#{name}"
       end
 
       def client
