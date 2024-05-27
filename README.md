@@ -10,7 +10,7 @@ This app is intended to be a simple example of a CRUD app built with **Ruby on R
 
 ### Admin user behaviour
 ![admin-user-1.png](admin-user-1.png)
-![admin-user-1.png](admin-user-1.png)
+![admin-user-2.png](admin-user-2.png)
 
 ---
 ## Running it locally
