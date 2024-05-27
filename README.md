@@ -50,6 +50,12 @@ To run Rails:
 docker-compose up
 ```
 
+To run specs
+
+```bash
+docker-compose run --rm rails rspec
+```
+
 To stop the running application(s): `Ctrl-C`
 
 To stop all services:

@@ -24,7 +24,7 @@ module Api
         if command.success?
           render json: serializer(command.result)
         else
-          render json: { errors: command.errors }, status: :unprocessable_entity
+          render json: command.errors, status: :unprocessable_entity
         end
       end
 
